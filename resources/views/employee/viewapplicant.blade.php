@@ -1,65 +1,98 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-@section('content')
-  <!-- header-start -->
-  <header>
-        <div class="header-area " style="background-color:#6b6bff;">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container-fluid ">
-                    <div class="header_bottom_border">
-                        <div class="row align-items-center">
-                            <div class="col-xl-3 col-lg-2">
-                            <div class="logo" style="height: 40px;">
-                                    <a href="index.html">
-                                    <img src="img/Picture1.png" alt="" style="height: 50px;border-radius: 50%;"> 
-                                    </a>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-7">
-                                <div class="main-menu  d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                        <li><a href="index.html">home</a></li>
-                                            <!-- <li><a href="jobs.html">Browse Job</a></li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="candidate.html">Candidates </a></li>
-                                                    <li><a href="job_details.html">job details </a></li>
-                                                    <li><a href="elements.html">elements</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">blog <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">blog</a></li>
-                                                    <li><a href="single-blog.html">single-blog</a></li>
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="adminhub-master/style.css">
 
-                                                    
-                                                </ul>
-                                            </li> -->
-                                            <li><a href="{{route('viewapplicant')}}">View applicants</a></li>
+	<title>AdminHub</title>
+</head>
+<body>
 
-                                            <!-- applicants authetication -->
 
-                                            @if (Route::has('login'))
-                
-                @auth
-                            @guest
-            
-            @if (Route::has('register'))
-               
-            @endif
-            @else
-       
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+        
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">AdminHub</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="#">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ route('job-post') }}">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Job post</span>
+                    
+				</a>
+			</li>
+           
+			<li>
+				<a href="{{route('viewapplicant')}}">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Applicants</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Message</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Team</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			
             <li>
                 
-                <a style="color:black;">
+                <a >
                     {{ Auth::user()->name }}
                     
                 </a>
 
-                <ul class="submenu">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
+                <ul >
+                    <a  href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
@@ -68,63 +101,53 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
-</ul>
+                </ul>
             </li>
-            
-        @endguest
+		</nav>
+		<!-- NAVBAR -->
 
-        @else
-        <li> <a href="{{ route('login') }}">Login</a></li>
+		<!-- MAIN -->
+		<main>
+        <div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Applicants</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+                                <th>Applicant</th>
+								<th>Applying</th>
+								<th>Resume</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+                        @foreach($user as $users)
+							<tr>
+								
+                                <td>{{$users->applicant_name}}</td>
+								<td>{{$users->job_name}}</td>
+								<td><span class="status completed"><a href="{{route('download',$users->file)}}" download>{{$users->file}}</a></span></td>
+                                
+							</tr>
+						@endforeach
+                        
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
 
-        @if (Route::has('register'))
-           <li> <a href="{{ route('register') }}">Register</a></li>
-        @endif
-    @endauth
+	<script src="adminhub-master/script.js"></script>
+</body>
+</html>
 
-@endif
-
- <!-- end applicants Authentication -->
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
-                                <div class="Appointment">
-                                    <div class="phone_num d-none d-xl-block">
-                                        <a href="#">Log in</a>
-                                    </div>
-                                    <div class="d-none d-lg-block">
-                                        <a class="boxed-btn3" href="{{ route('job-post') }}">Post a Job</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- header-end -->
-
-    <table style="    background: pink;
-    margin-top: 100px;
-    text-align: center;" class="container">
-        <tr>
-            <th>Applicant Name</th>
-            <th>Applying</th>
-            <th>Resume</th>
-            
-        </tr>
-        @foreach($user as $users)
-        <tr>
-            <td>{{$users->applicant_name}}</td>
-            <td>{{$users->job_name}}</td>
-            <td><a href="{{route('download',$users->file)}}" download>{{$users->file}}</a></td>
-        </tr>
-        @endforeach
-    </table>
-@endsection
+       

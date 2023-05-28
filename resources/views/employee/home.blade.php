@@ -10,7 +10,7 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo" style="height: 40px;">
-                                    <a href="index.html">
+                                    <a href="home">
                                     <img src="img/Picture1.png" alt="" style="height: 50px;border-radius: 50%;"> 
                                     </a>
                                 </div>
@@ -67,7 +67,7 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
-</ul>
+                </ul>
             </li>
             
         @endguest
@@ -123,7 +123,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text">
                         
-                        <a class="boxed-btn3" href="{{ route('job-post') }}">Post a Job</a>
+                        <a class="boxed-btn3" href="#">Post a Job</a>
                     </div>
                 </div>
             </div>

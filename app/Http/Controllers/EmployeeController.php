@@ -54,7 +54,9 @@ class EmployeeController extends Controller
 
     public function jobPost()
     {
-        return view('employee.jobpost');
+        $data = job::all();
+        $pages = job::paginate(1);
+        return view('employee.jobpost',compact('data','pages'));
     }
 
     public function uploadJob(Request $request)

@@ -64,7 +64,7 @@
                                 @endif
                             </div>
                         </div>
-                        <!-- <a class="btn btn-link" href="register-employee">For Employee</a> -->
+                         <a class="btn btn-link" href="register">Register</a> 
                     </form>
                 </div>
             </div>

@@ -32,9 +32,9 @@ class HomeController extends Controller
 
         if($usertype=='1')
         {
-            $data = job::all();
-            $pages = job::paginate(1);
-            return view('employee.home',compact('data','pages'));
+            
+            
+            return view('employee.admin');
             
         }
         else
