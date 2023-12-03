@@ -42,7 +42,6 @@ Route::get('/viewapplicant', 'EmployeeController@viewapplicant')->name('viewappl
 Route::get('/download/{users}', 'EmployeeController@download')->name('download');
 
 
-
 Route::post('/uploadresume', 'HomeController@uploadResume')->name('uploadresume');
 Route::get('/resume/{id}', 'HomeController@resume')->name('resume');
 Route::get('/jobdetails/{id}', 'HomeController@jobdetails')->name('jobdetails');
